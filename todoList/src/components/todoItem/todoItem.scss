@@ -1,0 +1,45 @@
+.todo-task {
+    margin-bottom: 50px;
+    background: #fff;
+    border: 3px solid #1abc9c;
+}
+
+.todo-list {
+    li {
+        list-style: none;
+    }
+}
+
+.todo-view {
+    display: flex;
+    align-items: center;
+    width: 98%;
+    height: 40px;
+    padding-left: 2%;
+    border-bottom: 1px solid #d9d9d9;
+
+    input {
+        flex-grow: 1;
+    }
+
+    span {
+        flex-grow: 50;
+    }
+
+    a {
+        display: none;
+        flex-grow: 1;
+        cursor: pointer;
+        color: red;
+    }
+
+    &:hover a {
+        display: block;
+    }
+}
+
+.todo-view span.finish {
+    color: #ccc;
+    text-decoration:line-through;
+}
+

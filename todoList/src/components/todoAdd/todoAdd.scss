@@ -1,0 +1,38 @@
+.todo-add {
+    h3 {
+        margin: 0;
+        padding: 0;
+        line-height: 60px;
+        font-size: 18px;
+        font-weight: 400;
+    }
+    input {
+        width: 98%;
+        line-height: 30px;
+        padding-left: 2%;
+        border: 2px solid #1abc9c;
+    }
+}
+
+.todo-ul {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    li {
+        line-height: 50px;
+        list-style: none;
+        color: #1abc9c;
+    }
+}
+
+.todo-ul li a {
+    padding: 2px 15px;
+    color: #000;
+    text-decoration: none;
+}
+
+.todo-ul li a.active,
+.todo-ul li a:hover{
+    background: #1abc9c;
+    color: #fff;
+}
