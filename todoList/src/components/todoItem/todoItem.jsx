@@ -15,10 +15,10 @@ class TodoItem extends Component {
                                     <input 
                                         type="checkbox" 
                                         checked={ item.isChecked && 'checked' } 
-                                        onChange={ change.bind(null, index) } 
+                                        onChange={ (e) => change(index, e) } 
                                     />
                                     <span className={ item.isChecked && 'finish'}>{ item.title }</span>
-                                    <a className="destroy" onClick={ clickDelete.bind(null, index) }>X</a>
+                                    <a className="destroy" onClick={ () => clickDelete(index) }>X</a>
                                 </div>
                             </li>
                         ))

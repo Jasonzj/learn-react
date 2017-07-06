@@ -31,32 +31,35 @@ class App extends Component {
 
     addTodo(e) {
         if (e.keyCode === 13) {
-            this.state.lists.push({
+            const lists = this.state.lists.slice()
+            lists.push({
                 title: e.target.value,
                 isChecked: false
             })
             e.target.value = ''
             this.setState({
-                lists: this.state.lists
+                lists
             })
-            store.save("todoList", this.state.lists)
+            store.save("todoList", lists)
         }
     }
 
     deleteTodo(index) {
-        this.state.lists.splice(index, 1)
+        const lists = this.state.lists.slice()
+        lists.splice(index, 1)
         this.setState({
-            lists: this.state.lists
+            lists
         })
-        store.save("todoList", this.state.lists)
+        store.save("todoList", lists)
     }
 
     isChecked(index, e) {
-        this.state.lists[index].isChecked = e.target.checked
+        const lists = this.state.lists.slice()
+        lists[index].isChecked = e.target.checked
         this.setState({
-            lists: this.state.lists
+            lists
         })
-        store.save("todoList", this.state.lists)
+        store.save("todoList", lists)
     }
 
     checkedLen() {
