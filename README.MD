@@ -1,2 +1,2 @@
-# learn react
+# Learn React
 react demo
