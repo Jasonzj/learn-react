@@ -31,7 +31,7 @@ class App extends Component {
 
     addTodo(e) {
         if (e.keyCode === 13) {
-            const lists = this.state.lists.slice()
+            const lists = [...this.state.lists]
             lists.push({
                 title: e.target.value,
                 isChecked: false
@@ -45,7 +45,7 @@ class App extends Component {
     }
 
     deleteTodo(index) {
-        const lists = this.state.lists.slice()
+        const lists = [...this.state.lists]
         lists.splice(index, 1)
         this.setState({
             lists
@@ -54,7 +54,7 @@ class App extends Component {
     }
 
     isChecked(index, e) {
-        const lists = this.state.lists.slice()
+        const lists = [...this.state.lists]
         lists[index].isChecked = e.target.checked
         this.setState({
             lists
