@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import Link from './Link'
-import store from './reducer'
 
 class FilterLink extends Component {
     componentDidMount() {
-        this.unsubscribe = store.subscribe(() => 
+        this.unsubscribe = this.store.subscribe(() => 
             this.forceUpdate()
         )
     }
@@ -14,7 +13,7 @@ class FilterLink extends Component {
     }
 
     visibilityAction = (filter) => {
-        store.dispatch({
+        this.store.dispatch({
             type: 'SET_VISIBILITY_FILTER',
             filter
         })
@@ -22,7 +21,9 @@ class FilterLink extends Component {
 
     render() {
         const { filter, children } = this.props
+        const { store } = this.context
         const state = store.getState()
+        this.store = store
         
         return (
             <Link 
@@ -34,5 +35,9 @@ class FilterLink extends Component {
         )
     }
 }
+FilterLink.contextTypes = {
+    store: React.PropTypes.object
+}
+
 
 export default FilterLink

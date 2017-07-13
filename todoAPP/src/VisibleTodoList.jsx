@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import TodoList from './TodoList'
-import store from './reducer'
 
 class VisibleTodoList extends Component {
     componentDidMount() {
-        this.unsubscribe = store.subscribe(() => 
+        this.unsubscribe = this.store.subscribe(() => 
             this.forceUpdate()
         )
     }
@@ -24,8 +23,8 @@ class VisibleTodoList extends Component {
         }
     }
 
-    toggleTodo = (id) => {
-        store.dispatch({
+    toggleTodoAction = (id) => {
+        this.store.dispatch({
             type: 'TOGGLE_TODO',
             id
         })
@@ -33,16 +32,21 @@ class VisibleTodoList extends Component {
 
     render() {
         const props = this.props
+        const { store } = this.context
         const state = store.getState()
         const todos = this.getVisibleTodos(state.todos, state.visibilityFilter)
+        this.store = store
 
         return (
             <TodoList 
                 todos={ todos }
-                onTodoClick={ this.toggleTodo }
+                onTodoClick={ this.toggleTodoAction }
             />
         )
     }
+}
+VisibleTodoList.contextTypes = {
+    store: React.PropTypes.object
 }
 
 export default VisibleTodoList

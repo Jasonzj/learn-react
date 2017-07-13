@@ -1,28 +1,18 @@
 import React, { Component } from 'react'
-import store from './reducer'
+
+let id = 0
 
 class AddTodo extends Component {
-    constructor() {
-        super()
-        this.state = {
-            id: 0
-        }
-    }
-
     componentDidMount() {
         this.resetInput()
     }
 
-    addTodo = () => {
-        let id = this.state.id
-        id++
+    addTodoAction = () => {
+        const { store } = this.context
         store.dispatch({
             type: 'ADD_TODO',
             text: this.input.value,
-            id
-        })
-        this.setState({
-            id
+            id: id++
         })
         this.resetInput()
     }
@@ -36,12 +26,15 @@ class AddTodo extends Component {
         return (
             <div>
                 <input type="text" ref={ (node) => this.input = node } /> 
-                <button onClick={ this.addTodo }>
+                <button onClick={ this.addTodoAction }>
                     Add Todo
                 </button>
             </div> 
         )
     }
+}
+AddTodo.contextTypes = {
+    store: React.PropTypes.object
 }
 
 export default AddTodo
