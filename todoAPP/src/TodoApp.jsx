@@ -27,6 +27,13 @@ class TodoApp extends Component {
         this.resetInput()
     }
 
+    toggleTodo(id) {
+        this.props.store.dispatch({
+            type: 'TOGGLE_TODO',
+            id
+        })
+    }
+
     resetInput() {
         this.input.value = ''
         this.input.focus()
@@ -45,7 +52,16 @@ class TodoApp extends Component {
                 <ul>
                     {
                         todos.map(todo => (
-                            <li key={todo.id}>
+                            <li 
+                                key={ todo.id }
+                                onClick={ () => this.toggleTodo(todo.id) }
+                                style = {{ 
+                                    textDecoration: 
+                                        todo.completed 
+                                            ? 'line-through' 
+                                            : 'none' 
+                                }}
+                            >
                                 { todo.text }
                             </li>
                         ))
