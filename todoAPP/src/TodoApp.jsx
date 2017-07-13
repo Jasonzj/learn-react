@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import FilterLink from './FilterLink'
 import TodoList from './TodoList'
 import AddTodo from './AddTodo'
+import Footer from './Footer'
 
 class TodoApp extends Component {
     constructor() {
@@ -15,7 +16,7 @@ class TodoApp extends Component {
         this.resetInput()
     }
 
-    addTodo() {
+    addTodo = () => {
         let id = this.state.id
         id++
         this.props.store.dispatch({
@@ -29,10 +30,18 @@ class TodoApp extends Component {
         this.resetInput()
     }
 
-    toggleTodo(id) {
+    toggleTodo = (id) => {
         this.props.store.dispatch({
             type: 'TOGGLE_TODO',
             id
+        })
+    }
+
+    setVisibilityFilter = (e, filter) => {
+        e.preventDefault()
+        this.props.store.dispatch({
+            type: 'SET_VISIBILITY_FILTER',
+            filter
         })
     }
 
@@ -55,45 +64,21 @@ class TodoApp extends Component {
     render() {
         const { todos, visibilityFilter } = this.props
         const visibleTodos = this.getVisibleTodos(todos, visibilityFilter)
-        const filterArgs = ['SHOW_ALL', 'SHOW_ACTIVE', 'SHOW_COMPLETED']
 
         return (
             <div>
                 <AddTodo 
-                    onClick={ this.addTodo.bind(this) }
                     todoApp={ this }
+                    onClick={ this.addTodo } 
                 />
                 <TodoList 
                     todos={ visibleTodos }
-                    onTodoClick={ this.toggleTodo.bind(this) }
+                    onTodoClick={ this.toggleTodo }
                 />
-                <p>
-                    Show:
-                    {' '}
-                    <FilterLink 
-                        filter='SHOW_ALL'
-                        store={ this.props.store }
-                        currentFilter={visibilityFilter}
-                    >
-                        All
-                    </FilterLink>
-                    {' '}
-                    <FilterLink 
-                        filter='SHOW_ACTIVE'
-                        store={ this.props.store }
-                        currentFilter={visibilityFilter}
-                    >
-                        Active
-                    </FilterLink>
-                    {' '}
-                    <FilterLink 
-                        filter='SHOW_COMPLETED'
-                        store={ this.props.store }
-                        currentFilter={visibilityFilter}
-                    >
-                        Completed
-                    </FilterLink>  
-                </p>
+                <Footer 
+                    visibilityFilter={ visibilityFilter }
+                    onFilterClick={ this.setVisibilityFilter }
+                />
             </div>
         )
     }
