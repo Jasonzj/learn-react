@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 // import createStore from './createStore'
 import { createStore } from 'redux'
 import expect from 'expect'
+import './todo'
 
 // Counter
 const Counter = ({
@@ -77,9 +78,3 @@ CounterRender()
 // ).toEqual(0)
 
 // console.log('Tests passed!!!!!!')
-
-
-
-
-
-
