@@ -37,13 +37,13 @@ class TodoApp extends Component {
         })
     }
 
-    setVisibilityFilter = (e, filter) => {
-        e.preventDefault()
-        this.props.store.dispatch({
-            type: 'SET_VISIBILITY_FILTER',
-            filter
-        })
-    }
+    // setVisibilityFilter = (e, filter) => {
+    //     e.preventDefault()
+    //     this.props.store.dispatch({
+    //         type: 'SET_VISIBILITY_FILTER',
+    //         filter
+    //     })
+    // }
 
     getVisibleTodos(todos, filter) {
         switch (filter) {
@@ -75,10 +75,7 @@ class TodoApp extends Component {
                     todos={ visibleTodos }
                     onTodoClick={ this.toggleTodo }
                 />
-                <Footer 
-                    visibilityFilter={ visibilityFilter }
-                    onFilterClick={ this.setVisibilityFilter }
-                />
+                <Footer />
             </div>
         )
     }

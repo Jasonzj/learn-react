@@ -13,14 +13,21 @@ class FilterLink extends Component {
         this.unsubscribe()
     }
 
+    visibilityAction = (filter) => {
+        store.dispatch({
+            type: 'SET_VISIBILITY_FILTER',
+            filter
+        })
+    }
+
     render() {
-        const { filter, children, onClick } = this.props
+        const { filter, children } = this.props
         const state = store.getState()
         
         return (
             <Link 
                 active={ filter === state.visibilityFilter }
-                onClick={ e => onClick(e, filter) }
+                onClick={ () => this.visibilityAction(filter) }
             >
                 { children }
             </Link>

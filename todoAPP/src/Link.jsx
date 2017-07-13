@@ -12,7 +12,10 @@ const Link = ({
     return (
         <a 
             href="#"
-            onClick={ onClick }
+            onClick={ e => {
+                e.preventDefault()
+                onClick()
+            }}
         >
             { children }
         </a>
