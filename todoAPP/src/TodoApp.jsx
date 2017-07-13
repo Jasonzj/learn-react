@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import FilterLink from './FilterLink'
+import TodoList from './TodoList'
 
 class TodoApp extends Component {
     constructor() {
@@ -61,24 +62,10 @@ class TodoApp extends Component {
                 <button onClick={ () => this.addTodo() }>
                     Add Todo
                 </button>
-                <ul>
-                    {
-                        visibleTodos.map(todo => (
-                            <li 
-                                key={ todo.id }
-                                onClick={ () => this.toggleTodo(todo.id) }
-                                style = {{ 
-                                    textDecoration: 
-                                        todo.completed 
-                                            ? 'line-through' 
-                                            : 'none' 
-                                }}
-                            >
-                                { todo.text }
-                            </li>
-                        ))
-                    }
-                </ul>
+                <TodoList 
+                    todos={ visibleTodos }
+                    onTodoClick={ this.toggleTodo.bind(this) }
+                />
                 <p>
                     Show:
                     {' '}
