@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FilterLink from './FilterLink'
 import TodoList from './TodoList'
+import AddTodo from './AddTodo'
 
 class TodoApp extends Component {
     constructor() {
@@ -58,10 +59,10 @@ class TodoApp extends Component {
 
         return (
             <div>
-                <input type="text" ref={ (node) => this.input = node } /> 
-                <button onClick={ () => this.addTodo() }>
-                    Add Todo
-                </button>
+                <AddTodo 
+                    onClick={ this.addTodo.bind(this) }
+                    todoApp={ this }
+                />
                 <TodoList 
                     todos={ visibleTodos }
                     onTodoClick={ this.toggleTodo.bind(this) }
@@ -92,23 +93,6 @@ class TodoApp extends Component {
                     >
                         Completed
                     </FilterLink>  
-                    {/* {
-                        filterArgs.map((filter, i) => {
-                            return (
-                                <FilterLink
-                                    key={ i }
-                                    filter={ filter }
-                                    currentFilter={visibilityFilter}
-                                    store={this.props.store}
-                                >
-                                    { 
-                                        filter.substr(5, 1) 
-                                            + filter.substr(6).toLowerCase()
-                                    }
-                                </FilterLink>
-                            )
-                        })
-                    }  */}
                 </p>
             </div>
         )
