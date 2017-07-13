@@ -5,10 +5,7 @@ import store from './reducer'
 
 const appRender = () => {
     render(
-        <TodoApp 
-            store={ store }
-            { ...store.getState() }
-        />,
+        <TodoApp />,
         document.getElementById('root')
     )
 }
