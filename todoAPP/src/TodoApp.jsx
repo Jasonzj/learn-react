@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import store from './reducer'
+import FilterLink from './FilterLink'
 
 class TodoApp extends Component {
     constructor() {
@@ -34,24 +34,35 @@ class TodoApp extends Component {
         })
     }
 
+    getVisibleTodos(todos, filter) {
+        switch (filter) {
+            case 'SHOW_ALL':
+                return todos
+            case 'SHOW_COMPLETED':
+                return todos.filter(t => t.completed)
+            case 'SHOW_ACTIVE':
+                return todos.filter(t => !t.completed)
+        }
+    }
+
     resetInput() {
         this.input.value = ''
         this.input.focus()
     }
 
     render() {
-        const { todos } = this.props
+        const { todos, visibilityFilter } = this.props
+        const visibleTodos = this.getVisibleTodos(todos, visibilityFilter)
 
         return (
             <div>
-                 <input type="text" ref={ (node) => this.input = node } /> 
-                {/* <input type="text" ref="input" /> */}
+                <input type="text" ref={ (node) => this.input = node } /> 
                 <button onClick={ () => this.addTodo() }>
                     Add Todo
                 </button>
                 <ul>
                     {
-                        todos.map(todo => (
+                        visibleTodos.map(todo => (
                             <li 
                                 key={ todo.id }
                                 onClick={ () => this.toggleTodo(todo.id) }
@@ -67,6 +78,33 @@ class TodoApp extends Component {
                         ))
                     }
                 </ul>
+                <p>
+                    Show:
+                    {' '}
+                    <FilterLink 
+                        filter='SHOW_ALL'
+                        store={ this.props.store }
+                        currentFilter={visibilityFilter}
+                    >
+                        All
+                    </FilterLink>
+                    {' '}
+                    <FilterLink 
+                        filter='SHOW_ACTIVE'
+                        store={ this.props.store }
+                        currentFilter={visibilityFilter}
+                    >
+                        Active
+                    </FilterLink>
+                    {' '}
+                    <FilterLink 
+                        filter='SHOW_COMPLETED'
+                        store={ this.props.store }
+                        currentFilter={visibilityFilter}
+                    >
+                        Completed
+                    </FilterLink>
+                </p>
             </div>
         )
     }
