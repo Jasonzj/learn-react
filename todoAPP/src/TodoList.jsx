@@ -11,7 +11,7 @@ const TodoList = ({
                 <Todo 
                     key={ todo.id }
                     onClick={ () => onTodoClick(todo.id) }
-                    {...todo}
+                    { ...todo }
                 />
             ))
         }
