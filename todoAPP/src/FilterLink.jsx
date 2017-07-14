@@ -1,43 +1,65 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Link from './Link'
 
-class FilterLink extends Component {
-    componentDidMount() {
-        this.unsubscribe = this.store.subscribe(() => 
-            this.forceUpdate()
-        )
+const mapStateToProps = (state, props) => {
+    return {
+        active: props.filter === state.visibilityFilter,
     }
+}
 
-    componentWillUnmount() {
-        this.unsubscribe()
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onClick() {
+            dispatch({
+                type: 'SET_VISIBILITY_FILTER',
+                filter: props.filter
+            })
+        }
     }
+}
 
-    visibilityAction = (filter) => {
-        this.store.dispatch({
-            type: 'SET_VISIBILITY_FILTER',
-            filter
-        })
-    }
+const FilterLink = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Link)
 
-    render() {
-        const {filter, children} = this.props
-        const {store} = this.context
-        const state = store.getState()
-        this.store = store
+// class FilterLink extends Component {
+//     componentDidMount() {
+//         this.unsubscribe = this.store.subscribe(() => 
+//             this.forceUpdate()
+//         )
+//     }
+
+//     componentWillUnmount() {
+//         this.unsubscribe()
+//     }
+
+//     visibilityAction = (filter) => {
+//         this.store.dispatch({
+//             type: 'SET_VISIBILITY_FILTER',
+//             filter
+//         })
+//     }
+
+//     render() {
+//         const {filter, children} = this.props
+//         const {store} = this.context
+//         const state = store.getState()
+//         this.store = store
         
-        return (
-            <Link 
-                active={filter === state.visibilityFilter}
-                onClick={() => this.visibilityAction(filter)}
-            >
-                {children}
-            </Link>
-        )
-    }
-}
-FilterLink.contextTypes = {
-    store: React.PropTypes.object
-}
-
+//         return (
+//             <Link 
+//                 active={filter === state.visibilityFilter}
+//                 onClick={() => this.visibilityAction(filter)}
+//             >
+//                 {children}
+//             </Link>
+//         )
+//     }
+// }
+// FilterLink.contextTypes = {
+//     store: React.PropTypes.object
+// }
 
 export default FilterLink
