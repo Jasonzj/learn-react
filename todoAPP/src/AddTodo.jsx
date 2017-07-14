@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import addTodo from './action/addTodo'
 
-let id = 0
 let AddTodo = ({ dispatch }) => {
     let input
 
@@ -9,11 +9,7 @@ let AddTodo = ({ dispatch }) => {
         <div>
             <input type="text" ref={(node) => input = node} /> 
             <button onClick={() => {
-                dispatch({
-                    type: 'ADD_TODO',
-                    text: input.value,
-                    id: id++
-                })
+                dispatch(addTodo(input.value))
                 input.value = ''
                 input.focus()
             }}>
