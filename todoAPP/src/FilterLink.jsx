@@ -20,17 +20,17 @@ class FilterLink extends Component {
     }
 
     render() {
-        const { filter, children } = this.props
-        const { store } = this.context
+        const {filter, children} = this.props
+        const {store} = this.context
         const state = store.getState()
         this.store = store
         
         return (
             <Link 
-                active={ filter === state.visibilityFilter }
-                onClick={ () => this.visibilityAction(filter) }
+                active={filter === state.visibilityFilter}
+                onClick={() => this.visibilityAction(filter)}
             >
-                { children }
+                {children}
             </Link>
         )
     }

@@ -14,7 +14,7 @@ const Todo = ({
                     : 'none' 
         }}
     >
-        { text }
+        {text}
     </li>
 )
 
